@@ -11,7 +11,8 @@ public class GameStateManager : MonoBehaviour
     {
         MainMenu_State,   // The game is at the main menu
         Gameplay_State,   // The game is actively being played
-        Paused_State      // The game is paused
+        Paused_State,     // The game is paused
+        Options_State   // The game is in the options menu
     }
 
     // Property to store the current game state, accessible publicly but modifiable only within this class
@@ -50,11 +51,6 @@ public class GameStateManager : MonoBehaviour
             Debug.Log("Switched to gameplay State");
             GameplayState();
         }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            Debug.Log("Switched to MainMenu State");
-            MainMenuState();
-        }       
     }
 
     // Handles any specific actions that need to occur when switching to a new state
@@ -82,6 +78,13 @@ public class GameStateManager : MonoBehaviour
                 Cursor.visible = true;
 
                 Time.timeScale = 0;
+                break;  
+
+            case GameState.Options_State:
+                _gameManager.uiManager.DisplayOptionsUI();
+                Cursor.visible = true;
+
+                Time.timeScale = 0;
                 break;            
         }
     }
@@ -97,6 +100,10 @@ public class GameStateManager : MonoBehaviour
     public void PauseState()
     { 
         ChangeState(GameState.Paused_State);
+    }
+    public void OptionsState()
+    { 
+        ChangeState(GameState.Options_State);
     }
     public void Quit()
     {

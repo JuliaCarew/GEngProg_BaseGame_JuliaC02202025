@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    private GameManager _gameManager;
     private string spawnPointName;
 
     public void LoadSceneWithSpawnPoint(string sceneName, string spawnPoint)
@@ -16,6 +17,16 @@ public class LevelManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded; // unsubscribe
         SetPlayerToSpawn();
+
+         if (_gameManager == null)
+        {
+            _gameManager = GameManager.Instance; // assign GameManager singleton 
+        }
+
+        if (_gameManager.uiManager == null)
+        {
+            _gameManager.uiManager = FindObjectOfType<UIManager>();
+        }
     }
 
     private void SetPlayerToSpawn()

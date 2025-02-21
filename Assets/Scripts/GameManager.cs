@@ -12,6 +12,27 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // Ensure GameManager persists across scenes
+        }
+        else
+        {
+            Destroy(gameObject); // Destroy duplicate GameManager instances
+        }
+    }
+
+    private void Start()
+    {
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<UIManager>();
+        }
+    }
+    /*
+    private void Awake()
+    {
 
         if (Instance != null && Instance != this)
         {
@@ -23,4 +44,5 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+    */
 }

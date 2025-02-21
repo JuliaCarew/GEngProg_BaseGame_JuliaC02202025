@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public GameObject menuUI;
     public GameObject gameplayUI;
     public GameObject pausedUI;
+    public GameObject optionsUI;
 
     public void DisplayMainMenuUI()
     {
@@ -26,10 +27,17 @@ public class UIManager : MonoBehaviour
         ClearUI();
         pausedUI.SetActive(true);
     }
+
+    public void DisplayOptionsUI()
+    {
+        ClearUI();
+        optionsUI.SetActive(true);
+    }
     public void ClearUI()
     {
-        menuUI.SetActive(false);
-        gameplayUI.SetActive(false);
-        pausedUI.SetActive(false);
+        if (menuUI != null) menuUI.SetActive(false);
+        if (gameplayUI != null) gameplayUI.SetActive(false);
+        if (pausedUI != null) pausedUI.SetActive(false);
+        if (optionsUI != null) optionsUI.SetActive(false);
     }
 }
